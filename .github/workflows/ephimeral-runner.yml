@@ -1,0 +1,43 @@
+name: Test Runner Ephemeral
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  test-runner:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Print basic info
+        run: |
+          echo "Runner name: $RUNNER_NAME"
+          echo "Runner OS: $RUNNER_OS"
+          echo "Runner Arch: $RUNNER_ARCH"
+          echo "Repository: $GITHUB_REPOSITORY"
+
+      - name: Verify working directory
+        run: pwd
+
+      - name: Show files
+        run: ls -lah
+
+      - name: Test Docker access
+        run: |
+          docker --version
+          docker ps
+
+      - name: Run a simple Docker container
+        run: |
+          docker run --rm alpine ping -c 2 google.com
+
+      - name: Test script
+        run: |
+          echo "Ejecutando pruebas..."
+          sleep 3
+          echo "Todo funcionando correctamente ✔️"

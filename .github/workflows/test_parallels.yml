@@ -1,0 +1,23 @@
+name: Test paralelo
+
+on:
+  workflow_dispatch:
+
+jobs:
+  job1:
+    runs-on: [self-hosted, ephemeral]
+    steps:
+      - run: echo "Job 1 esperando..."
+      - run: sleep 60
+
+  job2:
+    runs-on: [self-hosted, ephemeral]
+    steps:
+      - run: echo "Job 2 esperando..."
+      - run: sleep 60
+
+  job3:
+    runs-on: [self-hosted, ephemeral]
+    steps:
+      - run: echo "Job 3 esperando..."
+      - run: sleep 60
